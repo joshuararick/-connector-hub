@@ -1,0 +1,16 @@
+Sync Setup Assistance
+
+This file is a placeholder note, not Agent Maker project source. The sync script intentionally ignores it.
+
+Codex can write to `C:\Users\joshu\OneDrive\Documents\Ai Army`, but it still needs one of these before a true sync can happen:
+
+- A zip export/download of the Agent Maker project.
+- The actual project files copied into this `source_drop_here/` directory.
+- A GitHub or Git remote URL for the source project.
+
+After real source files are added here, run:
+
+```powershell
+Set-ExecutionPolicy -Scope Process -ExecutionPolicy Bypass
+.\scripts\sync-agent-maker.ps1 -TargetRepo "C:\Users\joshu\OneDrive\Documents\Ai Army"
+```

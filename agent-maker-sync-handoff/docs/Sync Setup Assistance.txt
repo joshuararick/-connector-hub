@@ -1,0 +1,18 @@
+Sync Setup Assistance
+
+Codex can work in this repository now, but it still cannot read a private ChatGPT project URL directly. A true sync requires a readable source package.
+
+Current state:
+
+1. `C:\Users\joshu\OneDrive\Documents\Ai Army` is writable from Codex.
+2. The repo contains the Connector Hub static app and local agent guidance.
+3. The updated handoff archive contains setup notes and scripts only.
+4. No real Agent Maker project source export is present yet.
+
+To move forward, provide one of these:
+
+- A zip export/download of the Agent Maker project.
+- The actual project files copied into `agent-maker-sync-handoff/source_drop_here/`.
+- A GitHub or Git remote URL for the source project.
+
+Once a readable source exists, run `scripts/sync-agent-maker.ps1` to import it and refresh the sync status docs.
