@@ -1,12 +1,11 @@
+Understood. I'll provide a readable source package instead of relying on the ChatGPT project URL.
 
-Understood. I’ll provide a readable source package instead of relying on the ChatGPT project URL.
+Next step from my side: I'll export or zip the Agent Maker project files and attach them here, or I'll provide a GitHub/Git remote URL if I move the source there first.
 
-Next step from my side: I’ll export or zip the Agent Maker project files and attach them here, or I’ll provide a GitHub/Git remote URL if I move the source there first.
-
-For write access, I’ll also make sure the workspace is switched out of read-only mode before asking you to sync into:
+The workspace is writable now, so the remaining requirement is the actual Agent Maker source package for:
 
 C:\Users\joshu\OneDrive\Documents\Ai Army
 
 Once both are available, please import the source, organize the repo, compare the local folder against the project contents, and set up a repeatable sync workflow.
 
-The fastest path is probably: zip the Agent Maker project → attach it → make the Codex workspace writable. After that, Codex should be able to do the repo setup properly instead of poking at an empty folder like a raccoon in a filing cabinet.
+The fastest path is probably: zip the Agent Maker project, attach it, and then run the handoff sync script.
