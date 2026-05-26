@@ -1,0 +1,5 @@
+tasks:
+  - id: task-001
+    goal: "Create a checklist for turning Agent Maker into an autonomous assistant."
+  - id: task-002
+    goal: "Summarize what safety gates are required before connecting browser or shell tools."

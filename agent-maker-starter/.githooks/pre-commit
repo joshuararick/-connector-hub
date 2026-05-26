@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+set -eu
+
+blocked='(^|/)(\.env($|\.)|secrets/|.*\.pem$|.*\.key$|id_rsa|id_ed25519)'
+if git diff --cached --name-only | grep -E "$blocked" >/dev/null 2>&1; then
+  echo "Blocked commit: staged files include secrets or private keys." >&2
+  echo "Unstage them and keep secrets local." >&2
+  exit 1
+fi
+
+if git diff --cached --check >/dev/null; then
+  exit 0
+else
+  exit 1
+fi

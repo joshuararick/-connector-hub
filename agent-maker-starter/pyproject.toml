@@ -1,0 +1,29 @@
+[project]
+name = "agent-maker-starter"
+version = "0.1.0"
+description = "Starter scaffold for a safe autonomous AI agent system"
+requires-python = ">=3.10"
+dependencies = [
+  "pydantic>=2.7",
+  "pyyaml>=6.0",
+  "rich>=13.7",
+  "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+llm = [
+  "openai>=1.0",
+]
+dev = [
+  "pytest>=8.0",
+]
+
+[project.scripts]
+agent-maker = "agent_maker.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]

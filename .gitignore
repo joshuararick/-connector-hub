@@ -1,0 +1,12 @@
+# Local secrets and generated credentials
+*DO-NOT-COMMIT*
+*.env
+!.env.example
+
+# Drop archives and local handoff payloads
+*.zip
+agent-maker-sync-handoff/source_drop_here/**
+!agent-maker-sync-handoff/source_drop_here/.gitkeep
+
+# Local runtime logs
+*.log
