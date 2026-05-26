@@ -7,15 +7,15 @@ Last sync run: 2026-05-26
 - Source site: https://joshuararick.github.io/-connector-hub/
 - Source repository: https://github.com/joshuararick/-connector-hub
 - Source branch: main
-- Source commit: 3dd16dc5f5f8b397daaeb5c844a35eb0bd9823b3
+- Source commit: 838d65cb8469280cc2f895efc337a1cfd06bd8c5
 
 ## Current Repo State
 
-- Ai Army is now synced from Connector Hub as a static HTML/CSS/JS app.
+- Ai Army is synced from Connector Hub as a static HTML/CSS/JS app.
 - Imported app files: `index.html`, `styles.css`, `app.js`, `README.md`, and `.github/workflows/pages.yml`.
 - Local agent guidance is preserved in `AGENTS.md` and `agents/agent-maker.profile.md`.
 - The original and updated Agent Maker handoff archives/folder are preserved for audit history.
-- No Git remote is configured for this repo, so this is currently a local import rather than a push-tracking checkout.
+- The local Git remote is configured as `origin` pointing at `https://github.com/joshuararick/-connector-hub.git`.
 
 ## Behavior And Storage
 
