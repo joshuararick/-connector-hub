@@ -5,9 +5,23 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Connector Hub</title>
   <meta name="description" content="A free owned hub for apps, AI agents, connectors, and automations." />
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; upgrade-insecure-requests">
+  <meta name="referrer" content="no-referrer" />
+  <meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), clipboard-read=()" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
+  <div id="lockScreen" class="lock-screen hidden">
+    <div class="lock-card">
+      <p class="eyebrow">Owner lock</p>
+      <h2>Connector Hub is protected.</h2>
+      <p class="muted">This is local-device protection only. Do not store real API keys in this static website.</p>
+      <input id="pinInput" type="password" autocomplete="current-password" placeholder="Enter local PIN" />
+      <button class="btn primary" id="unlockBtn">Unlock</button>
+      <button class="mini" id="resetPinBtn">Reset local PIN</button>
+    </div>
+  </div>
+
   <header class="topbar">
     <a class="brand" href="#top"><span>CH</span> Connector Hub</a>
     <nav><a href="#apps">Apps</a><a href="#agents">Agents</a><a href="#connectors">Connectors</a><a href="#security">Security</a></nav>
@@ -15,9 +29,10 @@
   <main id="top">
     <section class="hero">
       <div>
-        <p class="eyebrow">Free • Owned • No lock-in</p>
+        <p class="eyebrow">Free • Owned • Hardened starter</p>
         <h1>Your home base for apps, AI agents, and connectors.</h1>
         <p class="lead">A standalone website you control. Track every app, agent, API connector, security note, and publishing step without paying for a locked builder.</p>
+        <div class="warning"><strong>No real secrets:</strong> this page blocks obvious API keys/tokens and is designed for placeholders until a private backend is added.</div>
         <div class="actions"><a class="btn primary" href="#dashboard">Open dashboard</a><a class="btn" href="#publish">Publish free</a></div>
       </div>
       <aside class="console">
@@ -29,21 +44,22 @@
     <section class="section" id="apps"><p class="eyebrow">Apps</p><h2>Put every app in one place.</h2><div class="grid"><article><h3>Website</h3><p>Track pages, domain notes, launch status, and deployment links.</p></article><article><h3>Connector App</h3><p>Organize API endpoints, auth type, setup status, and testing notes.</p></article><article><h3>Internal Tools</h3><p>Keep dashboards, workflows, and utilities visible from one owned site.</p></article></div></section>
     <section class="section" id="agents"><p class="eyebrow">AI Agents</p><h2>Registry for all agents.</h2><p class="wide">Document each agent’s purpose, risk level, owner, and where it runs. Keep high-risk agents flagged so secrets and permissions stay under control.</p></section>
     <section class="app" id="dashboard">
-      <div class="app-head"><div><p class="eyebrow">Live dashboard</p><h2>Manage the hub</h2></div><button class="btn" id="exportBtn">Export backup</button></div>
+      <div class="app-head"><div><p class="eyebrow">Live dashboard</p><h2>Manage the hub</h2></div><div class="actions"><button class="btn" id="exportBtn">Export backup</button><button class="btn danger" id="wipeBtn">Wipe local data</button><button class="btn" id="lockBtn">Lock</button></div></div>
+      <div id="alertBox" class="alert hidden"></div>
       <div class="dash">
-        <form class="panel" id="appForm"><h3>Add App</h3><label>Name<input id="appName" required placeholder="Connector Hub" /></label><label>Type<select id="appType"><option>Website</option><option>Connector</option><option>Dashboard</option><option>Automation</option><option>Other</option></select></label><label>URL or Location<input id="appUrl" placeholder="https://yourdomain.com" /></label><label>Notes<textarea id="appNotes" placeholder="What it does, where it lives, next steps"></textarea></label><button class="btn primary" type="submit">Save app</button></form>
-        <section class="panel"><div class="row"><h3>Apps</h3><button class="mini" id="seedAppsBtn">Load examples</button></div><div id="appList" class="list empty">No apps yet.</div></section>
+        <form class="panel" id="appForm"><h3>Add App</h3><label>Name<input id="appName" required maxlength="80" placeholder="Connector Hub" /></label><label>Type<select id="appType"><option>Website</option><option>Connector</option><option>Dashboard</option><option>Automation</option><option>Other</option></select></label><label>URL or Location<input id="appUrl" maxlength="240" placeholder="https://yourdomain.com" /></label><label>Notes<textarea id="appNotes" maxlength="1200" placeholder="What it does, where it lives, next steps. No secrets."></textarea></label><button class="btn primary" type="submit">Save app</button></form>
+        <section class="panel"><div class="row"><h3>Apps</h3><button class="mini" id="seedAppsBtn" type="button">Load examples</button></div><div id="appList" class="list empty">No apps yet.</div></section>
       </div>
       <div class="dash">
-        <form class="panel" id="agentForm"><h3>Add AI Agent</h3><label>Name<input id="agentName" required placeholder="Security Agent" /></label><label>Purpose<input id="agentPurpose" required placeholder="What this agent does" /></label><label>Risk<select id="agentRisk"><option>Low</option><option>Medium</option><option>High</option></select></label><button class="btn primary" type="submit">Save agent</button></form>
-        <section class="panel"><div class="row"><h3>AI Agents</h3><button class="mini" id="seedAgentsBtn">Load examples</button></div><div id="agentList" class="list empty">No agents yet.</div></section>
+        <form class="panel" id="agentForm"><h3>Add AI Agent</h3><label>Name<input id="agentName" required maxlength="80" placeholder="Security Agent" /></label><label>Purpose<input id="agentPurpose" required maxlength="240" placeholder="What this agent does" /></label><label>Risk<select id="agentRisk"><option>Low</option><option>Medium</option><option>High</option></select></label><button class="btn primary" type="submit">Save agent</button></form>
+        <section class="panel"><div class="row"><h3>AI Agents</h3><button class="mini" id="seedAgentsBtn" type="button">Load examples</button></div><div id="agentList" class="list empty">No agents yet.</div></section>
       </div>
       <div class="dash" id="connectors">
-        <form class="panel" id="connectorForm"><h3>Create Connector</h3><label>Name<input id="connectorName" required placeholder="Gmail, Slack, Stripe" /></label><label>Base API URL<input id="baseUrl" required placeholder="https://api.example.com" /></label><label>Auth Type<select id="authType"><option>API Key</option><option>Bearer Token</option><option>OAuth</option><option>No Auth</option></select></label><label>Test Endpoint<input id="endpoint" placeholder="/health" /></label><label>Notes<textarea id="notes" placeholder="Use placeholders only. Do not store real secrets here."></textarea></label><button class="btn primary" type="submit">Save connector</button></form>
-        <section class="panel"><div class="row"><h3>Connectors</h3><button class="mini" id="seedConnectorsBtn">Load examples</button></div><div id="connectorList" class="list empty">No connectors yet.</div></section>
+        <form class="panel" id="connectorForm"><h3>Create Connector</h3><label>Name<input id="connectorName" required maxlength="80" placeholder="Gmail, Slack, Stripe" /></label><label>Base API URL<input id="baseUrl" required maxlength="240" placeholder="https://api.example.com" /></label><label>Auth Type<select id="authType"><option>API Key placeholder</option><option>Bearer Token placeholder</option><option>OAuth placeholder</option><option>No Auth</option></select></label><label>Test Endpoint<input id="endpoint" maxlength="160" placeholder="/health" /></label><label>Notes<textarea id="notes" maxlength="1200" placeholder="Use placeholders only. Real secrets belong server-side, never in this page."></textarea></label><button class="btn primary" type="submit">Save connector</button></form>
+        <section class="panel"><div class="row"><h3>Connectors</h3><button class="mini" id="seedConnectorsBtn" type="button">Load examples</button></div><div id="connectorList" class="list empty">No connectors yet.</div></section>
       </div>
     </section>
-    <section class="section security" id="security"><p class="eyebrow">Security</p><h2>Security rules for this free version.</h2><ul><li>Do not store real API keys in the browser-only version.</li><li>Use placeholders until a private backend is added.</li><li>Host only over HTTPS.</li><li>Add authentication before storing private team/customer data.</li><li>Export backups and keep them safe.</li></ul></section>
+    <section class="section security" id="security"><p class="eyebrow">Security</p><h2>Security rules for this free version.</h2><ul><li>Never store production API keys, tokens, passwords, refresh tokens, or private keys in this browser-only site.</li><li>Use placeholders until a private backend is added.</li><li>Host only over HTTPS.</li><li>Add real authentication before storing private team/customer data.</li><li>Use least-privilege API keys, rotate secrets, and keep backups safe.</li><li>Recommended backend later: server-side vault or environment variables, not localStorage.</li></ul></section>
     <section class="section" id="publish"><p class="eyebrow">Publish free</p><h2>Use GitHub Pages, Cloudflare Pages, or any static host.</h2><p class="wide">This site is plain HTML, CSS, and JavaScript. No paid database. No paid backend. No paid API required for the starter version.</p></section>
   </main>
   <footer><strong>Connector Hub</strong><span>Owned apps, agents, connectors, and automations.</span></footer>
