@@ -1,0 +1,38 @@
+{
+  "name": "b12-site-connector",
+  "displayName": "B12 Production Site Connector",
+  "version": "0.1.0",
+  "productionSite": "https://agent-command-center.b12sites.com/#overview",
+  "sourceRepo": "joshuararick/-connector-hub",
+  "sourceBranch": "main",
+  "sourceFiles": [
+    "index.html",
+    "styles.css",
+    "app.js",
+    "agents.json"
+  ],
+  "capabilities": [
+    "package_static_command_center",
+    "validate_required_files",
+    "check_public_site_reachability",
+    "deploy_via_configured_webhook",
+    "generate_b12_embed_snippet"
+  ],
+  "requiredEnvironment": [
+    {
+      "name": "B12_DEPLOY_WEBHOOK_URL",
+      "required": false,
+      "description": "Webhook or API endpoint supplied by B12 or an automation bridge that can update/publish the B12 site."
+    },
+    {
+      "name": "B12_DEPLOY_TOKEN",
+      "required": false,
+      "description": "Optional bearer token for the B12 deploy webhook or automation bridge."
+    }
+  ],
+  "security": {
+    "noSecretsInStaticFiles": true,
+    "blockSecretPatterns": true,
+    "privateApiRequiredForRealAgentActions": true
+  }
+}

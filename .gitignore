@@ -2,6 +2,10 @@
 *DO-NOT-COMMIT*
 *.env
 !.env.example
+backend/ANTHROPIC_API_KEY=*
+backend/*.env
+backend/*secret*
+backend/*token*
 
 # Drop archives and local handoff payloads
 *.zip
@@ -10,3 +14,10 @@ agent-maker-sync-handoff/source_drop_here/**
 
 # Local runtime logs
 *.log
+__pycache__/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.venv/
+venv/
+.vscode/

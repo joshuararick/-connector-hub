@@ -1,0 +1,47 @@
+{
+  "updated": "2026-05-26",
+  "sourceOfTruth": "GitHub repositories owned by joshuararick",
+  "productionSite": "https://agent-command-center.b12sites.com/#overview",
+  "repositories": [
+    {
+      "name": "agents",
+      "repo": "joshuararick/agents",
+      "url": "https://github.com/joshuararick/agents",
+      "role": "Main AI agent engineering repo",
+      "frameworks": ["OpenAI Agents SDK", "CrewAI", "LangGraph", "AutoGen", "MCP"],
+      "status": "Source repo",
+      "risk": "Medium",
+      "notes": "Course/project repo for coding and deploying autonomous AI agents."
+    },
+    {
+      "name": "connector-hub",
+      "repo": "joshuararick/-connector-hub",
+      "url": "https://github.com/joshuararick/-connector-hub",
+      "role": "Website and command center repo",
+      "frameworks": ["Static HTML", "GitHub Pages", "Browser localStorage"],
+      "status": "Website repo",
+      "risk": "Low",
+      "notes": "Static backup / registry layer for apps, agents, connectors, and deployments."
+    },
+    {
+      "name": "ai-agents-for-beginners",
+      "repo": "joshuararick/ai-agents-for-beginners",
+      "url": "https://github.com/joshuararick/ai-agents-for-beginners",
+      "role": "Reference learning repo",
+      "frameworks": ["AI Agents", "Examples", "Learning"],
+      "status": "Reference repo",
+      "risk": "Low",
+      "notes": "Reference material for agent patterns and beginner examples."
+    },
+    {
+      "name": "awesome-claude-code",
+      "repo": "joshuararick/awesome-claude-code",
+      "url": "https://github.com/joshuararick/awesome-claude-code",
+      "role": "Claude Code reference repo",
+      "frameworks": ["Claude Code", "Developer workflows", "References"],
+      "status": "Reference repo",
+      "risk": "Low",
+      "notes": "Reference collection for coding-agent workflows and development practices."
+    }
+  ]
+}

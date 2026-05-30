@@ -1,0 +1,33 @@
+name: B12 Connector Build
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Build connector package
+        run: node connectors/b12-site-connector/deploy-b12.js
+        env:
+          B12_DEPLOY_WEBHOOK_URL: ${{ secrets.B12_DEPLOY_WEBHOOK_URL }}
+          B12_DEPLOY_TOKEN: ${{ secrets.B12_DEPLOY_TOKEN }}
+
+      - name: Upload B12 package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: b12-command-center-package
+          path: dist-b12
