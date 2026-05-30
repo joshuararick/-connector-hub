@@ -14,8 +14,13 @@ python server.py
 
 ## Endpoints
 
-- `GET /health`
-- `GET /agents`
-- `POST /agents/<agent_id>/deploy`
+- `GET /` - human-readable backend home
+- `GET /health` - human-readable health page
+- `GET /agents` - human-readable agent directory
+- `GET /agents/<agent_id>` - human-readable agent detail page
+- `POST /agents/<agent_id>/deploy` - human-readable deploy result
+- `GET /api/health` - JSON health endpoint
+- `GET /api/agents` - JSON agent list
+- `POST /api/agents/<agent_id>/deploy` - JSON deploy result
 
 Do not commit API keys or personal financial details. Keep private context in local notes or a secure secrets manager, then pass only the minimum needed context at runtime.
