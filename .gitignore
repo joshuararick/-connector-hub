@@ -22,3 +22,6 @@ __pycache__/
 venv/
 .vscode/
 .codex-*.pid
+
+# Agent runtime memory
+.agent_memory.jsonl

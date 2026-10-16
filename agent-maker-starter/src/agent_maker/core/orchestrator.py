@@ -9,10 +9,11 @@ from agent_maker.tools.basic import default_registry
 
 
 class Orchestrator:
-    def __init__(self, memory_path: str = ".agent_memory.jsonl") -> None:
-        self.planner = DemoPlanner()
+    def __init__(self, memory_path: str = ".agent_memory.jsonl", planner=None, registry=None) -> None:
+        self.planner = planner or DemoPlanner()
         self.memory = LocalMemoryStore(memory_path)
-        self.executor = Executor(default_registry(), PolicyEngine(), self.memory)
+        reg = registry or default_registry()
+        self.executor = Executor(reg, PolicyEngine(), self.memory)
 
     def run_goal(self, goal: str, auto_approve: bool = False) -> AgentRun:
         run = self.planner.plan(goal)
