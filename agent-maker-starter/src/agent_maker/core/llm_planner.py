@@ -8,15 +8,16 @@ from agent_maker.core.state import AgentRun, PlanStep, RiskLevel
 
 
 def _load_openai_key() -> str:
-    """Read OPENAI_API_KEY from the environment or the git-ignored .env file."""
+    """Read OPENAI_API_KEY from the environment, the project .env, or ~/.secrets/api-keys.env."""
     if os.environ.get("OPENAI_API_KEY"):
         return os.environ["OPENAI_API_KEY"]
-    env_file = Path(__file__).resolve().parents[3] / ".env"
-    if env_file.exists():
-        for line in env_file.read_text(encoding="utf-8").splitlines():
-            name, _, value = line.partition("=")
-            if name.strip() == "OPENAI_API_KEY":
-                return value.strip()
+    env_files = [Path(__file__).resolve().parents[3] / ".env", Path.home() / ".secrets" / "api-keys.env"]
+    for env_file in env_files:
+        if env_file.exists():
+            for line in env_file.read_text(encoding="utf-8").splitlines():
+                name, _, value = line.partition("=")
+                if name.strip() == "OPENAI_API_KEY" and value.strip():
+                    return value.strip()
     return ""
 
 
